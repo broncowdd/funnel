@@ -1,4 +1,6 @@
-﻿funnel
+﻿<img src="https://github.com/broncowdd/funnel/raw/master/funnelicon.png"/>
+
+funnel
 ======
 bronco@warriordudimanche.net
 
