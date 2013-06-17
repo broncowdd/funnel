@@ -12,9 +12,10 @@
 
 ## CONFIG
 $feeds=array(
-	'http://www.olissea.com/mb/1-links/?do=rss',
-	'http://lehollandaisvolant.net/rss.php?mode=links',
-	'http://sebsauvage.net/links/index.php?do=rss',
+	'http://www.warriordudimanche.net/feed/rss',
+	'http://www.warriordudimanche.net/feed/rss/commentaires',
+	'http://www.warriordudimanche.net/shaarli/index.php?do=rss',
+	'http://warriordudimanche.net/tooeet.php?command=rss',
 	);
 
 date_default_timezone_set ('Europe/Paris');
@@ -26,7 +27,7 @@ define('ALLOW_GET',false);
 ## TEMPLATES
 $r="\n";
 define('TPL_RSS','<?xml version="1.0" encoding="utf-8" ?>'.$r.'<rss version="2.0"  xmlns:content="http://purl.org/rss/1.0/modules/content/">'.$r.'<channel>'.$r.'<title><![CDATA['.FUNNEL_FEED_NAME.']]></title>'.$r.'<link>'.FUNNEL_FEED_URL.'</link>'.$r.'<description>'.FUNNEL_FEED_DESCRIPTION.'</description>'.$r);
-define('TPL_RSS_ITEM','<item>'.$r.'<title><![CDATA[#TITLE]]></title>'.$r.'<guid isPermaLink="false"><![CDATA[#GUID]]></guid>'.$r.'<link>#LIEN</link>'.$r.'<description><![CDATA[#DESCRIPTION]]></description>'.$r.'<pubDate>#DATE</pubDate>'.$r.'</item>'.$r);
+define('TPL_RSS_ITEM','<item>'.$r.'<title><![CDATA[#TITLE]]></title>'.$r.'<guid isPermaLink="false"><![CDATA[#GUID]]></guid>'.$r.'<link><![CDATA[#LIEN]]></link>'.$r.'<description><![CDATA[#DESCRIPTION]]></description>'.$r.'<pubDate>#DATE</pubDate>'.$r.'</item>'.$r);
 define('TPL_RSS_FOOTER','</channel></rss>'.$r);
 ## FUNCTIONS
 function aff($a,$stop=true){echo 'Arret a la ligne '.__LINE__.' du fichier '.__FILE__.'<pre>';var_dump($a);echo '</pre>';if ($stop){exit();}}
@@ -51,7 +52,7 @@ function make_rss($array){
 		if(!isset($item['date'])){$item['date']='';}
 		if(!isset($item['description'])){$item['description']='';}
 		if(!isset($item['guid'])){$item['guid']='';}
-		if(!isset($item['link'])){$item['link']='';}
+		if(!isset($item['link'])){$item['link']=WEBSITE_REFERENCE_URL;} // en cas de lien vide il faut garder un flux valide
 		if(!isset($item['title'])){$item['title']='';}
 
 		$a=array(
